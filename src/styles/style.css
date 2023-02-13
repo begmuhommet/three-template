@@ -1,0 +1,32 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.tp-dfwv {
+  min-width: 380px;
+}
+
+.tp-lblv_v {
+  min-width: 240px;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
