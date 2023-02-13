@@ -4,7 +4,7 @@ import { WorldResizer } from '@/base/WorldResizer';
 import { WorldTime } from '@/base/WorldTime';
 import { WorldRenderer } from '@/base/WorldRenderer';
 import { WorldCamera } from '@/base/WorldCamera';
-import { Cube } from '@/components/Cube';
+import { Cube } from '@/components/Environment/Cube';
 import { DebugPane } from '@/base/DebugPane';
 
 export class World extends EventDispatcher {
