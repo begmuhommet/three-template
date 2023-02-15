@@ -1,7 +1,7 @@
 import { World } from '@/World';
 import { FolderApi, Pane } from 'tweakpane';
 
-export class DebugPane {
+export class WDebugPane {
   world: World;
   instance: Pane;
 

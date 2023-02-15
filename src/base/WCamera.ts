@@ -1,15 +1,15 @@
 import { EventDispatcher, PerspectiveCamera, Scene } from 'three';
 import { World } from '@/World';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { WorldRenderer } from '@/base/WorldRenderer';
-import { WorldResizer } from '@/base/WorldResizer';
+import { WRenderer } from '@/base/WRenderer';
+import { WResizer } from '@/base/WResizer';
 
-export class WorldCamera extends EventDispatcher {
+export class WCamera extends EventDispatcher {
   instance: PerspectiveCamera;
   controls: OrbitControls | null = null;
-  renderer: WorldRenderer;
+  renderer: WRenderer;
   scene: Scene;
-  resizer: WorldResizer;
+  resizer: WResizer;
   container: Element;
 
   constructor(world: World) {

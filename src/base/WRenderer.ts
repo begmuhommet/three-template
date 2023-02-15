@@ -1,7 +1,7 @@
 import { CineonToneMapping, EventDispatcher, PCFSoftShadowMap, sRGBEncoding, WebGLRenderer } from 'three';
 import { World } from '@/World';
 
-export class WorldRenderer extends EventDispatcher {
+export class WRenderer extends EventDispatcher {
   instance: WebGLRenderer;
   world: World;
 
@@ -29,15 +29,15 @@ export class WorldRenderer extends EventDispatcher {
   }
 
   start() {
-    this.instance.setAnimationLoop(() => this.update());
+    this.instance.setAnimationLoop((elapsedTime: number) => this.update(elapsedTime));
   }
 
   stop() {
     this.instance.setAnimationLoop(null);
   }
 
-  update() {
+  update(elapsedTime: number) {
     this.instance.render(this.world.scene, this.world.camera.instance);
-    this.updateObjects.forEach(obj => obj.tick());
+    this.updateObjects.forEach(obj => obj.tick(elapsedTime));
   }
 }

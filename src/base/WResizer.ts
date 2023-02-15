@@ -1,13 +1,13 @@
-import { EventDispatcher, PerspectiveCamera } from 'three';
+import { EventDispatcher } from 'three';
 import { World } from '@/World';
 import { sizes } from '@/data/sizes';
-import { WorldCamera } from '@/base/WorldCamera';
-import { WorldRenderer } from '@/base/WorldRenderer';
+import { WCamera } from '@/base/WCamera';
+import { WRenderer } from '@/base/WRenderer';
 
-export class WorldResizer extends EventDispatcher {
+export class WResizer extends EventDispatcher {
   container: Element;
-  camera: WorldCamera;
-  renderer: WorldRenderer;
+  camera: WCamera;
+  renderer: WRenderer;
 
   constructor(world: World) {
     super();
@@ -20,10 +20,7 @@ export class WorldResizer extends EventDispatcher {
   }
 
   onResize() {
-    if (this.camera.instance instanceof PerspectiveCamera) {
-      this.camera.instance.aspect = this.container.clientWidth / this.container.clientHeight;
-    }
-
+    this.camera.instance.aspect = this.container.clientWidth / this.container.clientHeight;
     this.camera.instance.updateProjectionMatrix();
     this.renderer.instance.setSize(this.container.clientWidth, this.container.clientHeight);
     this.renderer.instance.setPixelRatio(sizes.pixelRatio);

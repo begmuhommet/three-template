@@ -8,13 +8,11 @@ import {
   Scene,
 } from 'three';
 import { World } from '@/World';
-import { Cube } from '@/components/Cube';
-import { DebugPane } from '@/base/DebugPane';
+import { WDebugPane } from '@/base/WDebugPane';
 
-export class WorldLights extends EventDispatcher {
+export class WLights extends EventDispatcher {
   scene: Scene;
-  cube: Cube;
-  debugPain: DebugPane;
+  debugPain: WDebugPane;
 
   ambientLight: AmbientLight;
 
@@ -27,7 +25,6 @@ export class WorldLights extends EventDispatcher {
   constructor(world: World) {
     super();
     this.scene = world.scene;
-    this.cube = world.cube;
     this.debugPain = world.debugPane;
 
     // Ambient light
@@ -37,7 +34,6 @@ export class WorldLights extends EventDispatcher {
     // Point light
     this.pointLight = new PointLight('#ff0000', 200, 100);
     this.pointLight.position.set(3, 3, 0);
-    this.pointLight.lookAt(this.cube.instance.position);
     this.scene.add(this.pointLight);
 
     this.pointLightHelper = new PointLightHelper(this.pointLight);

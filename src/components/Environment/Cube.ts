@@ -1,13 +1,13 @@
 import { BoxGeometry, Mesh, MeshStandardMaterial, Scene } from 'three';
 import { World } from '@/World';
 import { WorldRenderer } from '@/base/WorldRenderer';
-import { DebugPane } from '@/base/DebugPane';
+import { WDebugPane } from '@/base/DebugPane';
 
 export class Cube {
   instance: Mesh;
   scene: Scene;
   renderer: WorldRenderer;
-  debugPane: DebugPane;
+  debugPane: WDebugPane;
 
   colors = {
     cubeColor: '#ffffff',
