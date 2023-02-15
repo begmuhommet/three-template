@@ -28,7 +28,7 @@ export class WCamera extends EventDispatcher {
   enableControls() {
     this.controls = new OrbitControls(this.instance, this.renderer.instance.domElement);
     this.controls.enableDamping = true;
-    this.renderer.addUpdateObjects(this);
+    this.renderer.addEventListener('tick', () => this.tick());
   }
 
   tick() {

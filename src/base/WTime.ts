@@ -17,7 +17,7 @@ export class WTime extends EventDispatcher {
     this.current = this.start;
     this.elapsed = 0;
     this.delta = 16;
-    this.world.renderer.addUpdateObjects(this);
+    this.world.renderer.addEventListener('tick', () => this.tick());
   }
 
   tick() {

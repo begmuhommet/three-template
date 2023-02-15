@@ -5,8 +5,6 @@ export class WRenderer extends EventDispatcher {
   instance: WebGLRenderer;
   world: World;
 
-  updateObjects: any[] = [];
-
   constructor(world: World) {
     super();
     this.world = world;
@@ -24,20 +22,16 @@ export class WRenderer extends EventDispatcher {
     this.instance.setClearColor('#211d20');
   }
 
-  addUpdateObjects(obj: any) {
-    this.updateObjects.push(obj);
-  }
-
   start() {
-    this.instance.setAnimationLoop((elapsedTime: number) => this.update(elapsedTime));
+    this.instance.setAnimationLoop(() => this.update());
   }
 
   stop() {
     this.instance.setAnimationLoop(null);
   }
 
-  update(elapsedTime: number) {
+  update() {
     this.instance.render(this.world.scene, this.world.camera.instance);
-    this.updateObjects.forEach(obj => obj.tick(elapsedTime));
+    this.dispatchEvent({ type: 'tick' });
   }
 }

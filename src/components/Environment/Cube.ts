@@ -1,12 +1,12 @@
 import { BoxGeometry, Mesh, MeshStandardMaterial, Scene } from 'three';
 import { World } from '@/World';
-import { WorldRenderer } from '@/base/WorldRenderer';
-import { WDebugPane } from '@/base/DebugPane';
+import { WRenderer } from '@/base/WRenderer';
+import { WDebugPane } from '@/base/WDebugPane';
 
 export class Cube {
   instance: Mesh;
   scene: Scene;
-  renderer: WorldRenderer;
+  renderer: WRenderer;
   debugPane: WDebugPane;
 
   colors = {
@@ -23,7 +23,6 @@ export class Cube {
     this.instance = new Mesh(geometry, material);
 
     this.scene.add(this.instance);
-    this.renderer.addUpdateObjects(this);
     this.setOptions();
     this.addToDebugPane();
   }

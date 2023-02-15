@@ -14,7 +14,7 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "skipLibCheck": true,
-    "types": ["node", "three", "tweakpane"],
+    "types": ["three", "tweakpane"],
     "paths": { "@": ["./src"], "@/*": ["./src/*"] }
   },
   "include": ["src"]
