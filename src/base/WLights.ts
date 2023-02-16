@@ -14,32 +14,39 @@ export class WLights extends EventDispatcher {
   scene: Scene;
   debugPain: WDebugPane;
 
-  ambientLight: AmbientLight;
+  ambientLight: AmbientLight | null = null;
 
-  pointLight: PointLight;
-  pointLightHelper: PointLightHelper;
+  pointLight: PointLight | null = null;
+  pointLightHelper: PointLightHelper | null = null;
 
-  directionalLight: DirectionalLight;
-  directionalLightHelper: DirectionalLightHelper;
+  directionalLight: DirectionalLight | null = null;
+  directionalLightHelper: DirectionalLightHelper | null = null;
 
   constructor(world: World) {
     super();
     this.scene = world.scene;
     this.debugPain = world.debugPane;
 
-    // Ambient light
+    this.addAmbientLight();
+    // this.addPointLight();
+    // this.addDirectionalLight();
+  }
+
+  addAmbientLight() {
     this.ambientLight = new AmbientLight('#ffffff', 2);
     this.scene.add(this.ambientLight);
+  }
 
-    // Point light
+  addPointLight() {
     this.pointLight = new PointLight('#ff0000', 200, 100);
     this.pointLight.position.set(3, 3, 0);
     this.scene.add(this.pointLight);
 
     this.pointLightHelper = new PointLightHelper(this.pointLight);
     this.scene.add(this.pointLightHelper);
+  }
 
-    // Directional light
+  addDirectionalLight() {
     this.directionalLight = new DirectionalLight('#00ff00', 1);
     this.directionalLight.position.set(-2, 2, 2);
     this.scene.add(this.directionalLight);
@@ -50,6 +57,7 @@ export class WLights extends EventDispatcher {
   }
 
   addDirectionalLightDebug() {
+    if (!this.directionalLight) return;
     this.debugPain.lightsFolder.addInput(this.directionalLight, 'intensity', {
       min: 0,
       max: 100,
