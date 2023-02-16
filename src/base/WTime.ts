@@ -1,5 +1,6 @@
 import { EventDispatcher } from 'three';
 import { World } from '@/World';
+import { CustomEvents } from '@/data/customEvents';
 
 export class WTime extends EventDispatcher {
   world: World;
@@ -17,7 +18,7 @@ export class WTime extends EventDispatcher {
     this.current = this.start;
     this.elapsed = 0;
     this.delta = 16;
-    this.world.renderer.addEventListener('tick', () => this.tick());
+    this.world.renderer.addEventListener(CustomEvents.Tick, () => this.tick());
   }
 
   tick() {

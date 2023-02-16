@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { CubeTextureLoader, EventDispatcher, TextureLoader } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { IResource, ResourceType } from '@/base/types';
+import { CustomEvents } from '@/data/customEvents';
 
 export class WLoader extends EventDispatcher {
   sources: IResource[] | null = null;
@@ -22,29 +23,29 @@ export class WLoader extends EventDispatcher {
     this.toLoad = this.sources.length;
     this.loaded = 0;
 
-    this.startLoading();
-
     this.gltfLoader = new GLTFLoader();
     this.textureLoader = new THREE.TextureLoader();
     this.cubeTextureLoader = new THREE.CubeTextureLoader();
+
+    this.startLoading();
   }
 
   startLoading() {
     if (!this.sources) return;
 
     for (const source of this.sources) {
-      if (source.type === ResourceType.GLTFModel) {
-        this.gltfLoader.load(source.path as string, file => {
-          this.sourceLoaded(source, file);
-        });
-      } else if (source.type === ResourceType.Texture) {
-        this.textureLoader.load(source.path as string, file => {
-          this.sourceLoaded(source, file);
-        });
-      } else if (source.type === ResourceType.CubeTexture) {
-        this.cubeTextureLoader.load(source.path as string[], file => {
-          this.sourceLoaded(source, file);
-        });
+      switch (source.type) {
+        case ResourceType.GLTFModel:
+          this.gltfLoader.load(source.path as string, file => this.sourceLoaded(source, file));
+          break;
+
+        case ResourceType.Texture:
+          this.textureLoader.load(source.path as string, file => this.sourceLoaded(source, file));
+          break;
+
+        case ResourceType.CubeTexture:
+          this.cubeTextureLoader.load(source.path as string[], file => this.sourceLoaded(source, file));
+          break;
       }
     }
   }
@@ -55,7 +56,7 @@ export class WLoader extends EventDispatcher {
     this.loaded++;
 
     if (this.loaded === this.toLoad) {
-      this.dispatchEvent({ type: 'resource_loaded' });
+      this.dispatchEvent({ type: CustomEvents.ResourceLoaded });
     }
   }
 }

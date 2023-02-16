@@ -1,5 +1,6 @@
 import { BoxGeometry, Mesh, MeshStandardMaterial } from 'three';
 import { World } from '@/World';
+import { CustomEvents } from '@/data/customEvents';
 
 export class Cube {
   instance: Mesh;
@@ -23,7 +24,7 @@ export class Cube {
 
   setOptions() {
     this.instance.rotation.set(0.5, 1, 0.5);
-    this.world.renderer.addEventListener('tick', () => this.tick());
+    this.world.renderer.addEventListener(CustomEvents.Tick, () => this.tick());
   }
 
   addToDebugPane() {

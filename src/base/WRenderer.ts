@@ -1,5 +1,6 @@
 import { CineonToneMapping, EventDispatcher, PCFSoftShadowMap, sRGBEncoding, WebGLRenderer } from 'three';
 import { World } from '@/World';
+import { CustomEvents } from '@/data/customEvents';
 
 export class WRenderer extends EventDispatcher {
   instance: WebGLRenderer;
@@ -32,6 +33,6 @@ export class WRenderer extends EventDispatcher {
 
   update() {
     this.instance.render(this.world.scene, this.world.camera.instance);
-    this.dispatchEvent({ type: 'tick' });
+    this.dispatchEvent({ type: CustomEvents.Tick });
   }
 }

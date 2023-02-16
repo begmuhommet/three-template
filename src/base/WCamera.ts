@@ -3,6 +3,7 @@ import { World } from '@/World';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { WRenderer } from '@/base/WRenderer';
 import { WResizer } from '@/base/WResizer';
+import { CustomEvents } from '@/data/customEvents';
 
 export class WCamera extends EventDispatcher {
   instance: PerspectiveCamera;
@@ -28,7 +29,7 @@ export class WCamera extends EventDispatcher {
   enableControls() {
     this.controls = new OrbitControls(this.instance, this.renderer.instance.domElement);
     this.controls.enableDamping = true;
-    this.renderer.addEventListener('tick', () => this.tick());
+    this.renderer.addEventListener(CustomEvents.Tick, () => this.tick());
   }
 
   tick() {
