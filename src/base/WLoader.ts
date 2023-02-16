@@ -1,9 +1,9 @@
 import * as THREE from 'three';
 import { CubeTextureLoader, EventDispatcher, TextureLoader } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { IResource } from '@/base/types';
+import { IResource, ResourceType } from '@/base/types';
 
-export class Resources extends EventDispatcher {
+export class WLoader extends EventDispatcher {
   sources: IResource[] | null = null;
   items: any = {};
   toLoad = 0;
@@ -30,20 +30,19 @@ export class Resources extends EventDispatcher {
   }
 
   startLoading() {
-    // Load each source
     if (!this.sources) return;
 
     for (const source of this.sources) {
-      if (source.type === 'gltfModel') {
-        this.gltfLoader.load(source.path, file => {
+      if (source.type === ResourceType.GLTFModel) {
+        this.gltfLoader.load(source.path as string, file => {
           this.sourceLoaded(source, file);
         });
-      } else if (source.type === 'texture') {
-        this.textureLoader.load(source.path, file => {
+      } else if (source.type === ResourceType.Texture) {
+        this.textureLoader.load(source.path as string, file => {
           this.sourceLoaded(source, file);
         });
-      } else if (source.type === 'cubeTexture') {
-        this.cubeTextureLoader.load(source.path as any, file => {
+      } else if (source.type === ResourceType.CubeTexture) {
+        this.cubeTextureLoader.load(source.path as string[], file => {
           this.sourceLoaded(source, file);
         });
       }

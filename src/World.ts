@@ -5,6 +5,7 @@ import { WTime } from '@/base/WTime';
 import { WCamera } from '@/base/WCamera';
 import { WDebugPane } from '@/base/WDebugPane';
 import { WRenderer } from '@/base/WRenderer';
+import { Cube } from '@/components/Environment/Cube';
 
 export class World extends EventDispatcher {
   loading = false;
@@ -18,6 +19,9 @@ export class World extends EventDispatcher {
   time: WTime;
   camera: WCamera;
   debugPane: WDebugPane;
+  // loader: WLoader;
+
+  cube: Cube;
 
   constructor(container: Element) {
     super();
@@ -30,6 +34,9 @@ export class World extends EventDispatcher {
     this.debugPane = new WDebugPane(this);
     this.lights = new WLights(this);
     this.resizer = new WResizer(this);
+    // this.loader = new WLoader(resources);
+
+    this.cube = new Cube(this);
 
     this.init();
     this.enableAxesHelper();
