@@ -3,10 +3,11 @@ import { CubeTextureLoader, EventDispatcher, TextureLoader } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { IResource, ResourceType } from '@/base/types';
 import { CustomEvents } from '@/data/customEvents';
+import { ResourceNames } from '@/data/resources';
 
 export class WLoader extends EventDispatcher {
   sources: IResource[] | null = null;
-  items: any = {};
+  items: { [key in ResourceNames]?: any } = {};
   toLoad = 0;
   loaded = 0;
 
@@ -51,7 +52,7 @@ export class WLoader extends EventDispatcher {
   }
 
   sourceLoaded(source: IResource, file: any) {
-    this.items[source.name] = file;
+    this.items[source.name as ResourceNames] = file;
 
     this.loaded++;
 
