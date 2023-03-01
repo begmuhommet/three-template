@@ -20,7 +20,7 @@ export class WRenderer extends EventDispatcher {
     this.instance.toneMappingExposure = 1.75;
     this.instance.shadowMap.enabled = true;
     this.instance.shadowMap.type = PCFSoftShadowMap;
-    this.instance.setClearColor('#211d20');
+    // this.instance.setClearColor('#211d20');
   }
 
   start() {

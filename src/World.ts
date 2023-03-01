@@ -5,8 +5,11 @@ import { WTime } from '@/base/WTime';
 import { WCamera } from '@/base/WCamera';
 import { WDebugPane } from '@/base/WDebugPane';
 import { WRenderer } from '@/base/WRenderer';
-import { Cube } from '@/components/Environment/Cube';
 import WStats from '@/base/WStats';
+import { WLoader } from '@/base/WLoader';
+import { ResourceNames, resources } from '@/data/resources';
+import { Helmet } from '@/components/Environment/Helmet';
+import { CustomEvents } from '@/data/customEvents';
 
 export class World extends EventDispatcher {
   loading = false;
@@ -21,15 +24,16 @@ export class World extends EventDispatcher {
   camera: WCamera;
   debugPane: WDebugPane;
   stats: WStats;
-  // loader: WLoader;
+  loader: WLoader;
 
-  cube: Cube;
+  helmet: Helmet;
 
   constructor(container: Element) {
     super();
 
     this.container = container;
     this.scene = new Scene();
+
     this.renderer = new WRenderer(this);
     this.camera = new WCamera(this);
     this.time = new WTime(this);
@@ -37,16 +41,22 @@ export class World extends EventDispatcher {
     this.lights = new WLights(this);
     this.resizer = new WResizer(this);
     this.stats = new WStats(this);
-    // this.loader = new WLoader(resources);
+    this.loader = new WLoader(this, resources);
 
-    this.cube = new Cube(this);
+    this.helmet = new Helmet(this);
 
     this.init();
-    this.enableAxesHelper();
+    // this.enableAxesHelper();
   }
 
   async init() {
     this.container.appendChild(this.renderer.instance.domElement);
+    this.loader.addEventListener(CustomEvents.ResourceLoaded, () => this.setEnvironmentMap());
+  }
+
+  setEnvironmentMap() {
+    this.scene.background = this.loader.items[ResourceNames.CubeTexture];
+    this.scene.environment = this.loader.items[ResourceNames.CubeTexture];
   }
 
   setLoading(value: boolean) {

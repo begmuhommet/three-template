@@ -21,7 +21,7 @@ export class WCamera extends EventDispatcher {
     this.container = world.container;
 
     this.instance = new PerspectiveCamera(75, world.container.clientWidth / world.container.clientHeight, 0.1, 1000);
-    this.instance.position.set(0, 0, 10);
+    this.instance.position.set(1, 1, 5);
     this.scene.add(this.instance);
     this.enableControls();
   }

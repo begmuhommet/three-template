@@ -27,6 +27,22 @@ body {
   min-width: 240px;
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+.loader {
+  position: absolute;
+  top: 50%;
+  height: 5px;
+  width: 50%;
+  left: 30%;
+  background: white;
+  transform: scaleX(0);
+  transform-origin: top left;
+  transition: transform 0.5s ease-in-out;
+  will-change: transform, opacity;
+  border-radius: 10px;
+}
+
+.loader.end {
+  transform: scaleX(0);
+  transform-origin: top right;
+  transition: transform 0.5s ease-in-out;
+}
